@@ -43,7 +43,7 @@ void Main()
 	codeBehind.Artist.Dump("Pass - Valid ID");
 	#endregion
 
-	#region Get Artisst (GetArtists)
+	#region Get Artists (GetArtists)
 	//	Fail
 	//	Rule:	artistName must be valid
 	codeBehind.GetArtists(string.Empty);
