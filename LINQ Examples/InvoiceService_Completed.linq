@@ -1,13 +1,13 @@
 <Query Kind="Program">
   <Connection>
-    <ID>813ec320-8be0-4b91-8ec8-c1549d53aaea</ID>
-    <NamingServiceVersion>2</NamingServiceVersion>
+    <ID>32a2c8ac-1482-45d7-bc6f-9bbdfbaac42a</ID>
+    <NamingServiceVersion>3</NamingServiceVersion>
     <Persist>true</Persist>
     <Driver Assembly="(internal)" PublicKeyToken="no-strong-name">LINQPad.Drivers.EFCore.DynamicDriver</Driver>
     <AllowDateOnlyTimeOnly>true</AllowDateOnlyTimeOnly>
-    <Server>.</Server>
+    <Server>(local)</Server>
     <Database>OLTP-DMIT2018</Database>
-    <DisplayName>OLTP-DMIT2018-Entity</DisplayName>
+    <DisplayName>OLTP-DMIT2018</DisplayName>
     <DriverData>
       <EncryptSqlTraffic>True</EncryptSqlTraffic>
       <PreserveNumeric1>True</PreserveNumeric1>
@@ -732,20 +732,24 @@ public class Library
 				return result.AddError(new Error("Missing Information", "Missting Part ID"));
 			}
 
-			if (invoiceLine.Price < 0)
+			//string partName = _hogWildContext.Parts
+			//						.Where(p => p.PartID == invoiceLine.PartID)
+			//						.Select(p => p.Description).FirstOrDefault();
+			var partResult = GetPart(invoiceLine.PartID);
+			string partName = string.Empty;
+			if (partResult != null)
 			{
-				string partName = _hogWildContext.Parts
-									.Where(p => p.PartID == invoiceLine.PartID)
-									.Select(p => p.Description).FirstOrDefault();
+				PartView part = partResult.Value;
+				partName = part.Description;
+			}
+									
+			if (invoiceLine.Price < 0)
+			{				
 				result.AddError(new Error("Invalid Price", $"Part {partName} has a price less than zero"));
 			}
 
-
 			if (invoiceLine.Quantity < 1)
 			{
-				string partName = _hogWildContext.Parts
-									.Where(p => p.PartID == invoiceLine.PartID)
-									.Select(p => p.Description).FirstOrDefault();
 				result.AddError(new Error("Invalid Quantity", $"Part {partName} has a quantity less than one"));
 			}
 

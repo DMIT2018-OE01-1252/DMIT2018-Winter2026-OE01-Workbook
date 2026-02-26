@@ -1,13 +1,13 @@
 <Query Kind="Program">
   <Connection>
-    <ID>813ec320-8be0-4b91-8ec8-c1549d53aaea</ID>
-    <NamingServiceVersion>2</NamingServiceVersion>
+    <ID>32a2c8ac-1482-45d7-bc6f-9bbdfbaac42a</ID>
+    <NamingServiceVersion>3</NamingServiceVersion>
     <Persist>true</Persist>
     <Driver Assembly="(internal)" PublicKeyToken="no-strong-name">LINQPad.Drivers.EFCore.DynamicDriver</Driver>
     <AllowDateOnlyTimeOnly>true</AllowDateOnlyTimeOnly>
-    <Server>.</Server>
+    <Server>(local)</Server>
     <Database>OLTP-DMIT2018</Database>
-    <DisplayName>OLTP-DMIT2018-Entity</DisplayName>
+    <DisplayName>OLTP-DMIT2018</DisplayName>
     <DriverData>
       <EncryptSqlTraffic>True</EncryptSqlTraffic>
       <PreserveNumeric1>True</PreserveNumeric1>
