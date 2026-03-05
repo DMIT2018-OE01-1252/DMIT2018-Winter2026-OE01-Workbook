@@ -47,6 +47,15 @@
           }
         }
       },
+      "BYSResults/1.2.3": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/BYSResults.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/BYSResults.dll": {}
+        }
+      },
       "Extensions.MudBlazor.StaticInput/3.2.1": {
         "type": "package",
         "dependencies": {
@@ -1918,6 +1927,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "BYSResults": "1.2.3",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.1"
         },
         "compile": {
@@ -1966,6 +1976,20 @@
         "azureicon.png",
         "lib/netstandard2.0/Azure.Identity.dll",
         "lib/netstandard2.0/Azure.Identity.xml"
+      ]
+    },
+    "BYSResults/1.2.3": {
+      "sha512": "xh55VyGNzozAgAT3ZKzoVDa/Bm8LzsS4QUWtnM6Hdq8RI5RnLAK8sW5vyLmEZ6MASCdcmWMCWGdC64xdJO4oYQ==",
+      "type": "package",
+      "path": "bysresults/1.2.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "bysresults.1.2.3.nupkg.sha512",
+        "bysresults.nuspec",
+        "icon.png",
+        "lib/net8.0/BYSResults.dll"
       ]
     },
     "Extensions.MudBlazor.StaticInput/3.2.1": {
@@ -5378,6 +5402,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "BYSResults >= 1.2.3",
       "Extensions.MudBlazor.StaticInput >= 3.*",
       "HogWildSystem >= 1.0.0",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 9.*",
@@ -5441,6 +5466,10 @@
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
+          "BYSResults": {
+            "target": "Package",
+            "version": "[1.2.3, )"
+          },
           "Extensions.MudBlazor.StaticInput": {
             "target": "Package",
             "version": "[3.*, )"

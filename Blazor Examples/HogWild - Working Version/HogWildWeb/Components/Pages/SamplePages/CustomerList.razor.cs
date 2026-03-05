@@ -2,6 +2,9 @@
 using HogWildSystem.BLL;
 using HogWildSystem.ViewModels;
 using HogWildWeb.Components;
+using BYSResults;
+using System.Reflection;
+using MudBlazor.Charts;
 
 namespace HogWildWeb.Components.Pages.SamplePages
 {
@@ -32,24 +35,31 @@ namespace HogWildWeb.Components.Pages.SamplePages
 
         // error details
         private List<string> errorDetails = new();
-        #endregion
-       
-        #region Properties
-        // Injects the CustomerService dependency.
-        [Inject]
-        protected CustomerService CustomerService { get; set; } = default!;
+		#endregion
 
-        // Injects the NavigationManager dependency.
-        [Inject]
+		#region Properties
+		// Injects the CustomerService dependency.
+		[Inject]
+		protected CustomerService CustomerService { get; set; } = default!;
+
+		// Injects the InvoiceService dependency.
+		[Inject]
+		protected InvoiceService InvoiceService { get; set; } = default!;
+
+		// Injects the NavigationManager dependency.
+		[Inject]
         protected NavigationManager NavigationManager { get; set; } = default!;
 
         // Gets or sets the customers search view.
         protected List<CustomerSearchView> Customers { get; set; } = new();
-        #endregion
 
-        #region Methods
-        //  search for an existing customer
-        private void Search()
+        protected InvoiceView Invoice = default!;
+		protected CustomerSearchView Customer = default!;
+		#endregion
+
+		#region Methods
+		//  search for an existing customer
+		private void Search()
         {
             try
             {
@@ -125,9 +135,101 @@ namespace HogWildWeb.Components.Pages.SamplePages
         //  new invoice for selected customer
         private void NewInvoice(int customerID)
         {
+			// clear previous error details and messages
+			errorDetails.Clear();
+			errorMessage = string.Empty;
+			feedbackMessage = String.Empty;
 
-        }
+			//Missing Invoice: No invoice was supply
+			//InvoiceView invoiceView = null;
 
-        #endregion
-    }
+			//Missing Information: All rules except rules involving invoice lines
+			InvoiceView invoiceView = new InvoiceView();
+			//  update missing fields
+			invoiceView.CustomerID = 1;
+			invoiceView.EmployeeID = 1;
+			List<InvoiceLineView> invoiceLineViews = new();
+
+			//Missing Information: Missing part
+			//InvoiceLineView invoiceLineView = new();
+			//invoiceLineViews.Add(invoiceLineView);
+
+			//Invalid Part price and quantity
+			//InvoiceLineView invoiceLineView = new()
+			//{
+			//    PartID = 1,
+			//    Price = -1,
+			//    Quantity = 0
+			//};
+			//         InvoiceLineView invoiceLineView = new();
+			//         invoiceLineView.PartID = 1;
+			//         invoiceLineView.Price = -1;
+			//invoiceLineView.Quantity = 0;
+
+			//Duplicated Invoice Line Items
+			invoiceView.InvoiceID = 1173;
+			InvoiceLineView invoiceLineView = new()
+			{
+				PartID = 1,
+				Price = 10,
+				Quantity = 4
+			};
+			invoiceLineViews.Add(invoiceLineView);
+			invoiceLineView = new()
+			{
+				PartID = 1,
+				Price = 10,
+				Quantity = 4
+			};
+			invoiceLineViews.Add(invoiceLineView);
+
+			invoiceView.InvoiceLines = invoiceLineViews;
+
+			Customer = Customers
+                        .Where(c => c.CustomerID == customerID)
+                        .FirstOrDefault();
+
+			// wrap the service call in a try/catch to handle unexpected exceptions
+			try
+			{
+				Result<InvoiceView> result = InvoiceService.AddEditInvoice(invoiceView);
+				if (result.IsSuccess)
+				{
+					Invoice = result.Value;
+				}
+				else
+				{
+					errorMessage = $"Unable to create a new Invoice for customer {Customer.FirstName} {Customer.LastName}";
+					errorDetails = GetErrorMessages(result.Errors.ToList());
+				}
+			}
+			catch (Exception ex)
+			{
+				// capture any exception message for display
+				errorMessage = ex.Message;
+			}
+		}
+
+		#endregion
+
+		//	This region includes support methods
+		#region Support Method
+		// Converts a list of error objects into their string representations.
+		public static List<string> GetErrorMessages(List<BYSResults.Error> errorMessage)
+		{
+			// Initialize a new list to hold the extracted error messages
+			List<string> errorList = new();
+
+			// Iterate over each Error object in the incoming list
+			foreach (var error in errorMessage)
+			{
+				// Convert the current Error to its string form and add it to errorList
+				errorList.Add(error.ToString());
+			}
+
+			// Return the populated list of error message strings
+			return errorList;
+		}
+		#endregion
+	}
 }

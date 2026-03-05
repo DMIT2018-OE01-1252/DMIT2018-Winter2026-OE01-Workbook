@@ -50,6 +50,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "BYSResults": {
+              "target": "Package",
+              "version": "[1.2.3, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[9.0.1, )"
@@ -125,6 +129,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "BYSResults": {
+              "target": "Package",
+              "version": "[1.2.3, )"
+            },
             "Extensions.MudBlazor.StaticInput": {
               "target": "Package",
               "version": "[3.*, )"

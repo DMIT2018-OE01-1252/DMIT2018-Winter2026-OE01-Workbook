@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v9.0": {
       "HogWildSystem/1.0.0": {
         "dependencies": {
+          "BYSResults": "1.2.3",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.1"
         },
         "runtime": {
@@ -46,6 +47,14 @@
           "lib/netstandard2.0/Azure.Identity.dll": {
             "assemblyVersion": "1.11.4.0",
             "fileVersion": "1.1100.424.31005"
+          }
+        }
+      },
+      "BYSResults/1.2.3": {
+        "runtime": {
+          "lib/net8.0/BYSResults.dll": {
+            "assemblyVersion": "1.2.3.0",
+            "fileVersion": "1.2.3.0"
           }
         }
       },
@@ -594,6 +603,13 @@
       "sha512": "sha512-Sf4BoE6Q3jTgFkgBkx7qztYOFELBCo+wQgpYDwal/qJ1unBH73ywPztIJKXBXORRzAeNijsuxhk94h0TIMvfYg==",
       "path": "azure.identity/1.11.4",
       "hashPath": "azure.identity.1.11.4.nupkg.sha512"
+    },
+    "BYSResults/1.2.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xh55VyGNzozAgAT3ZKzoVDa/Bm8LzsS4QUWtnM6Hdq8RI5RnLAK8sW5vyLmEZ6MASCdcmWMCWGdC64xdJO4oYQ==",
+      "path": "bysresults/1.2.3",
+      "hashPath": "bysresults.1.2.3.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
       "type": "package",
